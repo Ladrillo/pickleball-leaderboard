@@ -1,0 +1,5 @@
+exports[`About component Renders correctly... 1`] = `
+<div>
+  This is the about page
+</div>
+`;

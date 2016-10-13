@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Pickleball Leaderboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+    <meta name="viewport" content="initial-scale=1" />
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    you can't be here unless you're authed
+    <a href="/auth/checklogin">check login</a>
+    <div id="app"></div>
+    <script>
+        window.user = <%- userStr || 'null' %>;
+    </script>
+    <script src="./bundle/bundle.js"></script>
+</body>
+
+</html>

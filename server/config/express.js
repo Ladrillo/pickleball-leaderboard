@@ -57,6 +57,7 @@ module.exports = () => {
     // routes
     require('../apis/evaluate/bootstrap.routes')(app);
     require('../apis/authentication/auth')(app); 
+    require('../apis/players/player.routes')(app); 
 
     // static assets
     app.use(express.static('./client'));

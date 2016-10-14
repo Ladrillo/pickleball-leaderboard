@@ -5,3 +5,4 @@ thumbs.db
 node_modules/
 /client/bundle
 npm-debug.log
+/.vscode

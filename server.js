@@ -1,12 +1,12 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-var port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 
 
-var express = require('./server/config/express');
+const express  = require('./server/config/express');
+const mongoose = require('./server/config/mongoose');
 
-
-var app = express();
-
+const app = express();
+const db  = mongoose();
 
 app.listen(port, function () {
     console.log('listening on ' + port);

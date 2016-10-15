@@ -1,11 +1,11 @@
 import * as types from '../actionTypes';
 
 
-export default function bootstrapping(state = '', action) {
+export default function players(state = [], action) {
 
     switch (action.type) {
 
-        case types.BOOTSTRAPPING_SUCCESSFUL:
+        case types.GET_PLAYERS_SUCCEEDED:
             return action.payload;
 
         default:

@@ -1,8 +1,8 @@
-import watchHello from './sagas/hello';
+import watchGetPlayers from './sagas/getPlayers';
 
 
 export default function* rootSaga() {
     yield [
-        watchHello()
+        watchGetPlayers()
     ];
 }

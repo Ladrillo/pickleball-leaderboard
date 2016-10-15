@@ -19,14 +19,13 @@ const _callback = (accessToken, refreshToken, profile, done) => {
             var player = new Player;
 
             player.displayName  = profile.displayName;
-            // player.imageURL     = profile.image.url;
             player.google.id    = profile.id;
             player.google.token = accessToken;
 
             console.log('about to save player in database: ', player);
 
             player.save();
-            return done(null, player); // this goes to all req.user
+            return done(null, player);
         }
     });
 };

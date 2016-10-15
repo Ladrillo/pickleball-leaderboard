@@ -3,20 +3,21 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as types from '../actionTypes';
 import * as actions from '../actions/actions';
+import LeaderBoard from './LeaderBoard';
 
 
 const Home = props => (
     <div>
         Welcome to the Awesome Pickleball Leaderboard!
         <br/>
-        <button onClick = { props.bootstrapping }>bootstraps?</button>
-        <h1>{ props.state.bootstrapping.text }</h1>
+        <LeaderBoard />
     </div>
 );
 
 
 const mapStateToProps = (state, ownProps) => ({
-    state
+    state,
+    players: state.players
 });
 
 

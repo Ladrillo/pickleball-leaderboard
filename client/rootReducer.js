@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
-import bootstrapping from './reducers/bootstrapping';
+import players from './reducers/players';
+import authedPlayer from './reducers/authedPlayer';
 
 
 const rootReducer = combineReducers({
-    bootstrapping
+    authedPlayer,
+    players
 });
 
 

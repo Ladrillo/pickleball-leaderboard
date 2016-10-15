@@ -1,6 +1,5 @@
 import * as types from '../actionTypes';
 
-
-export const bootstrapping = () => ({
-    type: types.BOOTSTRAPPING
+export const getPlayers = () => ({
+    type: types.GET_PLAYERS
 });

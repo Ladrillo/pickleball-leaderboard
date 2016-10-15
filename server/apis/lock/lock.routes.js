@@ -7,4 +7,7 @@ module.exports = app => {
 
     app.route('/api/unlock')
         .post(Ctrl.unlockPlayer);
+
+    app.route('/api/unlock_all')
+        .get(Ctrl.unlockAll);
 };

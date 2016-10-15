@@ -1,4 +1,5 @@
 import React from 'react';
+import { getChallengeables } from '../helpers/sorting';
 
 
 const Player = props => {
@@ -10,14 +11,24 @@ const Player = props => {
         backgroundColor: props.authedPlayer._id === props.player._id ? 'green' : 'red'
     };
 
+    const challengeables = getChallengeables(props.players, props.authedPlayer);
+
     return (
         <div style = { style }>
             <p>SCORE: { props.player.stats.score }</p>
             <p>{ props.player.displayName }</p>
             <p>{ props.player.score }</p>
             {
-                props.authedPlayer._id !== props.player._id &&
-                <a href="#">challenge this guy</a>
+                challengeables.indexOf(props.player._id) > -1 &&
+                !props.authedPlayer.stats.locked.id &&
+                <button
+                    onClick = { () => props.challengeHandler(props.authedPlayer, props.player) }>
+                    challenge this guy
+                </button>
+            }
+            {
+                props.player.stats.locked.id &&
+                <div>CURRENTLY LOCKED IN COMBAT!</div>
             }
         </div>
     );

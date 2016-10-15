@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as types from '../actionTypes';
 import * as actions from '../actions/actions';
 import Player from './Player';
+import { compareScoreFunction } from '../helpers/sorting';
 
 
 class LeaderBoard extends React.Component {
@@ -13,16 +14,19 @@ class LeaderBoard extends React.Component {
     }
 
     render() {
+        
         const players = this.props.players.map(player => (
             <Player
-                key          = { player._id }
-                player       = { player }
-                authedPlayer = { this.props.authedPlayer } />
+                key              = { player._id }
+                player           = { player }
+                players          = { this.props.players }
+                authedPlayer     = { this.props.authedPlayer }
+                challengeHandler = { this.props.challenge } />
         ));
 
         return (
             <div>
-                { players }
+                { players.sort(compareScoreFunction) }
             </div>
         );
     }

@@ -44,3 +44,16 @@ exports.unlockPlayer = (req, res, next) => {
         res.status(500).json('unlock failed');
     }
 };
+
+
+exports.unlockAll = (req, res, next) => {
+
+    Player.find({})
+        .then(players => {
+            players.forEach(pl => {
+                 pl.stats.locked = '';
+                 pl.save();
+            });
+        })
+        .then(() => res.status(200).json('successful unlock ALL'));
+};

@@ -1,21 +1,39 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
+
 let PlayerSchema = new Schema({
     displayName: {
         type: String
     },
-    image: {
-        type: String
+    google: {
+        displayName: { type: String },
+        id: {
+            type: String,
+            // required: true
+        },
     },
     stats: {
-        type: Object,
-        default: {}
+        joined: {
+            type: Date,
+            default: Date.now
+        },
+        score: {
+            type: Number,
+            default: 0
+        },
+        locked: {
+            id: {
+                type: String,
+                default: '',
+                // required: true
+            },
+            date: { type: Date }
+         },
+        gamesPlayed: { type: Number },
+        percentageWon: { type: Number }
     },
-    google: {
-        type: Object,
-        default: {}
-    }
 });
+
 
 module.exports = mongoose.model('Player', PlayerSchema);

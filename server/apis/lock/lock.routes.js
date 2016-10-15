@@ -2,10 +2,9 @@ var Ctrl = require('./lock.controller');
 
 module.exports = app => {
 
-    app.route('/api/players/lock')
+    app.route('/api/lock')
         .post(Ctrl.lockPlayer);
 
-    app.route('/api/players/unlock')
+    app.route('/api/unlock')
         .post(Ctrl.unlockPlayer);
-
 };

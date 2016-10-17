@@ -8,6 +8,12 @@ export default function players(state = [], action) {
         case types.GET_PLAYERS_SUCCEEDED:
             return action.payload;
 
+        case types.CHALLENGE_SUCCEEDED:
+            return action.payload;
+
+        case types.UNCHALLENGE_SUCCEEDED:
+            return action.payload;
+
         default:
             return state;
     }

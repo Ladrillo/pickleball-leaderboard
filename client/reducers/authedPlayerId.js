@@ -1,10 +1,10 @@
 import * as types from '../actionTypes';
 
 
-export default function authedPlayerId(state = (window.user._id || ''), action) {
+export default function authedPlayerId(state = '', action) {
 
     switch (action.type) {
         default:
-            return state;
+            return window.user._id || '';
     }
 }

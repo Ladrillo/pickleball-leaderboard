@@ -46,6 +46,7 @@ let Player = props => {
 
 
 let mapStateToProps = (state, ownProps) => ({
+    state,
     authedPlayerId: state.authedPlayerId,
     me: state.players.find(pl => pl._id === state.authedPlayerId),
     myOpponent: state.players.find(pl => pl.stats.locked.id === state.authedPlayerId)

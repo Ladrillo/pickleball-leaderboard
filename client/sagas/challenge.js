@@ -4,6 +4,40 @@ import { call, put, select } from 'redux-saga/effects';
 import * as types from '../actionTypes';
 
 
+export function* challengeSucceded(payload) {
+    yield put({
+        type: types.CHALLENGE_SUCCEEDED,
+        payload
+    });
+}
+
+export function* challegeFailed(error) {
+    yield put({
+        type: types.CHALLENGE_FAILED,
+        error
+    });
+}
+
+export function* unchallengeSucceded(payload) {
+    yield put({
+        type: types.UNCHALLENGE_SUCCEEDED,
+        payload
+    });
+}
+
+export function* unchallegeFailed(error) {
+    yield put({
+        type: types.UNCHALLENGE_FAILED,
+        error
+    });
+}
+
+export function* getPlayers() {
+    yield put({
+        type: types.GET_PLAYERS
+    });
+}
+
 export function* challenge(action) {
     try {
         const result = yield call(post,
@@ -19,22 +53,12 @@ export function* challenge(action) {
             yield put({
                 type: types.INCONSISTENT_STATE
             });
-            yield put({
-                type: types.GET_PLAYERS
-            });
+            yield call(getPlayers);
         }
         else if (result.status == 200) {
-            yield put({
-                type: types.CHALLENGE_SUCCEEDED
-            });
-            yield put({
-                type: types.GET_PLAYERS
-            });
+            yield call(challengeSucceded, result.data);
         }
         else if (result.status != 200) {
-            yield put({
-                type: types.GET_PLAYERS
-            });
             const error = {
                 result
             };
@@ -43,10 +67,7 @@ export function* challenge(action) {
     }
     catch (error) {
         console.log(error);
-        yield put({
-            type: types.CHALLENGE_FAILED,
-            error
-        });
+        yield call(challegeFailed, error);
     }
 }
 
@@ -67,17 +88,10 @@ export function* unchallenge(action) {
             yield put({
                 type: types.INCONSISTENT_STATE
             });
-            yield put({
-                type: types.GET_PLAYERS
-            });
+            yield call(getPlayers);
         }
         else if (result.status == 200) {
-            yield put({
-                type: types.UNCHALLENGE_SUCCEEDED
-            });
-            yield put({
-                type: types.GET_PLAYERS
-            });
+            yield call(unchallengeSucceded, result.data);
         }
         else if (result.status != 200) {
             const error = {
@@ -88,10 +102,7 @@ export function* unchallenge(action) {
     }
     catch (error) {
         console.log(error);
-        yield put({
-            type: types.UNCHALLENGE_FAILED,
-            error
-        });
+        yield call(unchallegeFailed, error);
     }
 }
 

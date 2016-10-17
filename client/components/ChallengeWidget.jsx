@@ -7,7 +7,7 @@ let ChallengeWidget = props => {
 
     let { challengeHandler, unchallengeHandler } =  props;
     let { player, me, authedPlayerId, isChallengeable, myOpponentId, isMe } = props;
-
+console.log('widget rendering!')
     return (
         <div>
             {

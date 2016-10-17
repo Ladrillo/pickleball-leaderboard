@@ -4,7 +4,7 @@ import { call, put, select } from 'redux-saga/effects';
 import * as types from '../actionTypes';
 
 
-export function* getPlayers(action) {
+export function* getPlayers() {
     try {
         const result = yield call(get, '/api/players');
 

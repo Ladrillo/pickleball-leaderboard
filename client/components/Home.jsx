@@ -6,21 +6,24 @@ import * as actions from '../actions/actions';
 import LeaderBoard from './LeaderBoard';
 
 
-const Home = props => (
-    <div>
-        Welcome to the Awesome Pickleball Leaderboard!
-        <br/>
-        <LeaderBoard />
-    </div>
-);
+class Home extends React.Component {
+
+    componentWillMount() {
+        this.props.getPlayers();
+    }
+
+    render() {
+        return (
+            <div>
+                Welcome to the Awesome Pickleball Leaderboard!
+                <LeaderBoard />
+            </div>
+        );
+    }
+}
 
 
-const mapStateToProps = (state, ownProps) => ({
-    state,
-    players: state.players
-});
-
-
+const mapStateToProps = (state, ownProps) => ({});
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 

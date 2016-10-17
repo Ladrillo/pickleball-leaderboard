@@ -25,6 +25,7 @@ export function* getPlayers(action) {
         }
     }
     catch (error) {
+        console.log(error);
         yield put({
             type: types.GET_PLAYERS_FAILED,
             error

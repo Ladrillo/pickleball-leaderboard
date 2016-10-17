@@ -13,26 +13,18 @@ import Player from './Player';
 
 class LeaderBoard extends React.Component {
 
-    componentWillMount() {
-        this.props.getPlayers();
-    }
-
     render() {
 
-        const { players, authedPlayerId } = this.props;
+        let { players, authedPlayerId, me } = this.props;
 
-        const me             = players.find(pl => pl._id === authedPlayerId);
-        const myOpponent     = players.find(pl => pl.stats.locked.id === me._id);
-        const challengeables = getChallengeables(players, me);
+        let challengeables = getChallengeables(players, me);
 
-        const playersList = players.map(player => (
+        let playersList = players.map(player => (
             <Player
                 key             = { player._id }
                 player          = { player }
-                me              = { me }
-                myOpponent      = { myOpponent || null }
-                isMe            = { player._id === me._id || false }
-                isMyOpponent    = { (myOpponent && myOpponent._id) || false }
+                isMe            = { player._id === authedPlayerId || false }
+                isMyOpponent    = { player.stats.locked.id === authedPlayerId || false }
                 isChallengeable = { challengeables.indexOf(player._id) > -1 || false } />
         ));
 
@@ -46,13 +38,14 @@ class LeaderBoard extends React.Component {
 }
 
 
-const mapStateToProps = (state, ownProps) => ({
+let mapStateToProps = (state, ownProps) => ({
+    players: state.players,
     authedPlayerId: state.authedPlayerId,
-    players: state.players
+    me: state.players.find(pl => pl._id === state.authedPlayerId),
 });
 
 
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+let mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 
 export default connect(

@@ -21,7 +21,7 @@ exports.lockPlayer = (req, res, next) => {
                         res.status(500).json(err);
                     }
 
-                    else if (player1.stats.locked.id || player2.stats.locked.id) {
+                    else if (!player1 || !player2 || player1.stats.locked.id || player2.stats.locked.id) {
                         res.status(200).json({ warning: 'refresh' });
                     }
 
@@ -60,7 +60,7 @@ exports.unlockPlayer = (req, res, next) => {
                         res.status(500).json(err);
                     }
 
-                    else if (!player1.stats.locked.id || !player2.stats.locked.id) {
+                    else if (!player1 || !player2 || !player1.stats.locked.id || !player2.stats.locked.id) {
                         res.status(200).json({ warning: 'refresh' });
                     }
 

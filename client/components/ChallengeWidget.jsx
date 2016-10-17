@@ -3,10 +3,10 @@ import React from 'react';
 import { getChallengeables } from '../helpers/sorting';
 
 
-const ChallengeWidget = props => {
+let ChallengeWidget = props => {
 
-    const { challengeHandler, unchallengeHandler } =  props;
-    const { player, me, myOpponent, isChallengeable, isMyOpponent, isMe } = props;
+    let { challengeHandler, unchallengeHandler } =  props;
+    let { player, me, authedPlayerId, isChallengeable, myOpponentId, isMe } = props;
 
     return (
         <div>
@@ -28,17 +28,17 @@ const ChallengeWidget = props => {
                 isMe && player.stats.locked.id &&
                 <div>
                     <button 
-                        onClick = { () => unchallengeHandler(me, myOpponent, 'won') }>
+                        onClick = { () => unchallengeHandler(authedPlayerId, myOpponentId, 'won') }>
                         Gloriously defeated my foe!
                     </button>
                     <br/>
                     <button
-                        onClick = { () => unchallengeHandler(me, myOpponent, 'lost') }>
+                        onClick = { () => unchallengeHandler(authedPlayerId, myOpponentId, 'lost') }>
                         Got my butt handed to me
                     </button>
                     <br/>
                     <button
-                        onClick = { () => unchallengeHandler(me, myOpponent, '') }>
+                        onClick = { () => unchallengeHandler(authedPlayerId, myOpponentId, '') }>
                         Cancel challenge
                     </button>
                 </div>

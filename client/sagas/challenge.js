@@ -42,6 +42,7 @@ export function* challenge(action) {
         }
     }
     catch (error) {
+        console.log(error);
         yield put({
             type: types.CHALLENGE_FAILED,
             error
@@ -86,6 +87,7 @@ export function* unchallenge(action) {
         }
     }
     catch (error) {
+        console.log(error);
         yield put({
             type: types.UNCHALLENGE_FAILED,
             error

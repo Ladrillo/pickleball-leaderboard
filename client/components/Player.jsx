@@ -16,21 +16,41 @@ const Player = props => {
     const { challenge, unchallenge } = props;
 
     const selectColor = () => {
-        if (isMe || isMyOpponent) return '#FCD95D';
+        if (isMe || isMyOpponent) return '#FDC403';
+        else return '#FFF9E6';
     };
 
-    const style = {
+    const divStyle = {
         margin: 10,
         padding: 10,
         borderStyle: 'solid',
         backgroundColor: selectColor()
     };
 
+    const nameStyle = {
+        fontFamily: 'Indie Flower',
+        textAlign: 'center',
+        fontSize: 32,
+        marginBottom: 12
+    };
+
+    const scoreStyle = {
+        fontFamily: 'Luckiest Guy',
+        fontSize: 28
+    };
+
+    const parentStyle = {
+        display: 'flex',
+        justifyContent: 'flex-end'
+    };
+
     return (
-        <div style = { style }>
-            <p>SCORE: { player.stats.score }</p>
-            <p>{ player.displayName }</p>
-            <p>{ player.score }</p>
+        <div style = { divStyle }>
+            <div style = { parentStyle }>
+                <div style = { scoreStyle }>{ player.stats.score }</div>
+            </div>
+            <div style = { nameStyle }>{ player.displayName }</div>
+            <div>{ player.score }</div>
             <ChallengeWidget
                 challengeHandler   = { challenge }
                 unchallengeHandler = { unchallenge }

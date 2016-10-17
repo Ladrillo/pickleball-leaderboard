@@ -28,9 +28,13 @@ class LeaderBoard extends React.Component {
                 isChallengeable = { challengeables.indexOf(player._id) > -1 || false } />
         ));
 
+        const style = {
+            backgroundColor: '#7141B7'
+        };
+
         return (
-            <div>
-                <button onClick = { this.props.getPlayers }>REFRESH LEADERBOARD!</button>
+            <div style = { style }>
+                { /*<button onClick = { this.props.getPlayers }>REFRESH LEADERBOARD!</button>*/ }
                 { playersList.sort(compareScoreFunction ) }
             </div>
         );

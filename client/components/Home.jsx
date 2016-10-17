@@ -13,9 +13,16 @@ class Home extends React.Component {
     }
 
     render() {
+        const style = {
+            fontFamily: 'Indie Flower',
+            textAlign: 'center',
+            color: '#FFF9E6',
+            fontSize: 48
+        };
+
         return (
-            <div>
-                Welcome to the Awesome Pickleball Leaderboard!
+            <div style = {{ margin: 20, backgroundColor: '#7141B7' }}>
+                <p style = { style }>Welcome to the Awesome Pickleball Leaderboard!</p>
                 <LeaderBoard />
             </div>
         );

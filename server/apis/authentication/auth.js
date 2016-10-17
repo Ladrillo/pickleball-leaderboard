@@ -6,7 +6,7 @@ module.exports = app => {
         '/auth/google',
         passport.authenticate(
             'google',
-            { scope: ['profile'] }
+            { scope: [ 'profile' ] }
         )
     );
 
@@ -16,7 +16,7 @@ module.exports = app => {
             'google',
             { failureRedirect: '/login' }
         ),
-        (req, res) => res.redirect(`/?user=${req.user}`)
+        (req, res) => res.redirect(`/`)
     );
 
     app.route('/login')
@@ -27,9 +27,11 @@ module.exports = app => {
     app.route('/')
         .get((req, res) => {
             if (!req.user) res.redirect('/login');
-            res.render('index', {
-                userStr: JSON.stringify(req.user)
-            });
+            else {
+                res.render('index', {
+                    userStr: JSON.stringify(req.user)
+                });
+            }
         });
 
     app.route('/auth/checklogin')

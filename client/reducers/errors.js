@@ -6,10 +6,13 @@ const errors = (state = [], action) => {
 
         case types.GET_PLAYERS_FAILED:
             return state.concat(action.error);
+
         case types.CHALLENGE_FAILED:
             return state.concat(action.error);
+
         case types.UNCHALLENGE_FAILED:
             return state.concat(action.error);
+
         default:
             return state;
     }

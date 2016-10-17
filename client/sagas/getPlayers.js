@@ -7,7 +7,11 @@ import * as types from '../actionTypes';
 export function* getPlayers(action) {
     try {
         const result = yield call(get, '/api/players');
-        if (result.status == 200) {
+
+        if (result.status == 200 && result.data.warning === 'authenticate') {
+            location.reload();
+        }
+        else if (result.status == 200) {
             yield put({
                 type: types.GET_PLAYERS_SUCCEEDED,
                 payload: result.data

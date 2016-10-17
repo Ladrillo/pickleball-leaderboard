@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import players from './reducers/players';
-import authedPlayer from './reducers/authedPlayer';
+import authedPlayerId from './reducers/authedPlayerId';
 import errors from './reducers/errors';
 
 
 const rootReducer = combineReducers({
-    authedPlayer,
+    authedPlayerId,
     players,
     errors
 });

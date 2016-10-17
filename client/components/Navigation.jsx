@@ -10,7 +10,6 @@ const Navigation = props => (
             justifyContent: 'space-around',
             listStyleType: 'none'
         }}>
-            <li><NavLink to='/home'>Home</NavLink></li>
             <li><NavLink to='/about'>About</NavLink></li>
             <li><NavLink to='/'>Root</NavLink></li>
         </ul>

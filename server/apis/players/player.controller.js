@@ -7,6 +7,7 @@ exports.getPlayers = (req, res, next) => {
         .exec((err, players) => {
 
             if (err) res.status(500).send(err);
+            else if (!req.user) res.status(200).json({ warning: 'authenticate' });
             else res.status(200).json(players);
         });
 };
@@ -18,6 +19,7 @@ exports.getOnePlayer = (req, res, next) => {
         .exec((err, player) => {
 
             if (err) res.status(500).send(err);
+            else if (!req.user) res.status(200).json({ warning: 'authenticate' });
             else res.status(200).json(player);
         });
 };
@@ -25,12 +27,15 @@ exports.getOnePlayer = (req, res, next) => {
 
 exports.postPlayer = function (req, res, next) {
 
-    let player = new Player(req.body);
-    player.save((err, player) => {
+    if (!req.user) res.status(200).json({ warning: 'authenticate' });
+    else {
+        let player = new Player(req.body);
+        player.save((err, player) => {
 
-        if (err) res.status(500).send(err);
-        else res.status(200).json(player);
-    });
+            if (err) res.status(500).send(err);
+            else res.status(200).json(player);
+        });
+    }
 };
 
 
@@ -40,6 +45,7 @@ exports.deletePlayer = (req, res, next) => {
         .exec((err, player) => {
 
             if (err) res.status(500).send(err);
+            else if (!req.user) res.status(200).json({ warning: 'authenticate' });
             else {
                 player.remove(err => {
                     if (err) res.status(500).send(err);

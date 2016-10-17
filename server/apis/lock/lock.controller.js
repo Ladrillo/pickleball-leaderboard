@@ -4,21 +4,36 @@ let Player = require('../players/player.model');
 exports.lockPlayer = (req, res, next) => {
 
     Player.findById(req.body.id1)
-        .exec((err, player) => {
+        .exec((err, player1) => {
 
-            if (err) res.status(500).send(err);
+            if (err) {
+                res.status(500).json(err);
+            }
+
+            else if (!req.user) {
+                res.status(200).json({ warning: 'authenticate' });
+            }
 
             else {
-                player.stats.locked.id = req.body.id2;
-                player.save();
+                Player.findById(req.body.id2, (err, player2) => {
 
-                Player.findById(req.body.id2, (err, player) => {
+                    if (err) {
+                        res.status(500).json(err);
+                    }
 
-                    if (err) res.status(500).send(err);
-                    player.stats.locked.id = req.body.id1;
-                    player.save();
+                    else if (player1.stats.locked.id || player2.stats.locked.id) {
+                        res.status(200).json({ warning: 'refresh' });
+                    }
 
-                    res.status(200).json('successful lock');
+                    else {
+                        player1.stats.locked.id = req.body.id2;
+                        player1.save();
+
+                        player2.stats.locked.id = req.body.id1;
+                        player2.save();
+
+                        res.status(200).json('successful lock');
+                    }
                 });
             }
         });
@@ -27,32 +42,57 @@ exports.lockPlayer = (req, res, next) => {
 
 exports.unlockPlayer = (req, res, next) => {
 
-    try {
-        Player.findById(req.body.id1)
-        .then(player1 => {
-            player1.stats.locked.id = '';
-            player1.save();
-        })
-        .then(() => Player.findById(req.body.id2))
-        .then(player2 => {
-            player2.stats.locked.id = '';
-            player2.save();
-            res.status(200).json('successful unlock');
+    Player.findById(req.body.id1)
+        .exec((err, player1) => {
+
+            if (err) {
+                res.status(500).json(err);
+            }
+
+            else if (!req.user) {
+                res.status(200).json({ warning: 'authenticate' });
+            }
+
+            else {
+                Player.findById(req.body.id2, (err, player2) => {
+
+                    if (err) {
+                        res.status(500).json(err);
+                    }
+
+                    else if (!player1.stats.locked.id || !player2.stats.locked.id) {
+                        res.status(200).json({ warning: 'refresh' });
+                    }
+
+                    else {
+                        player1.stats.locked.id = '';
+                        if (req.body.result === 'won') {
+                            player1.stats.score += 1;
+                        }
+                        player1.save();
+
+                        player2.stats.locked.id = '';
+                        if (req.body.result === 'lost') {
+                            player2.stats.score += 1;
+                        }
+                        player2.save();
+
+                        res.status(200).json('successful lock');
+                    }
+                });
+            }
         });
-    }
-    catch (e) {
-        res.status(500).json('unlock failed');
-    }
 };
 
 
+// unprotected
 exports.unlockAll = (req, res, next) => {
 
     Player.find({})
         .then(players => {
             players.forEach(pl => {
-                 pl.stats.locked = '';
-                 pl.save();
+                pl.stats.locked = '';
+                pl.save();
             });
         })
         .then(() => res.status(200).json('successful unlock ALL'));

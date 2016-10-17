@@ -1,38 +1,52 @@
 import React from 'react';
-import { getChallengeables } from '../helpers/sorting';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import * as types from '../actionTypes';
+import * as actions from '../actions/actions';
+
+import { calculateColor } from '../helpers/player';
+
+import ChallengeWidget from './ChallengeWidget';
 
 
 const Player = props => {
+
+    // const backgroundColor = calculateColor(props, challengeables);
+    const { player, me, myOpponent, isMe, isMyOpponent, isChallengeable } = props;
+    const { challenge, unchallenge } = props;
 
     const style = {
         margin: 10,
         padding: 10,
         borderStyle: 'solid',
-        backgroundColor: props.authedPlayer._id === props.player._id ? 'green' : 'red'
+        backgroundColor: 'white'
     };
-
-    const challengeables = getChallengeables(props.players, props.authedPlayer);
 
     return (
         <div style = { style }>
-            <p>SCORE: { props.player.stats.score }</p>
-            <p>{ props.player.displayName }</p>
-            <p>{ props.player.score }</p>
-            {
-                challengeables.indexOf(props.player._id) > -1 &&
-                !props.authedPlayer.stats.locked.id &&
-                <button
-                    onClick = { () => props.challengeHandler(props.authedPlayer, props.player) }>
-                    challenge this guy
-                </button>
-            }
-            {
-                props.player.stats.locked.id &&
-                <div>CURRENTLY LOCKED IN COMBAT!</div>
-            }
+            <p>SCORE: { player.stats.score }</p>
+            <p>{ player.displayName }</p>
+            <p>{ player.score }</p>
+            <ChallengeWidget
+                challengeHandler   = { challenge }
+                unchallengeHandler = { unchallenge }
+                player             = { player }
+                me                 = { me }
+                myOpponent         = { myOpponent }
+                isChallengeable    = { isChallengeable }
+                isMyOpponent       = { isMyOpponent }
+                isMe               = { isMe } />
         </div>
     );
 };
 
 
-export default Player;
+const mapStateToProps = (state, ownProps) => ({});
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Player);

@@ -1,7 +1,7 @@
 import * as types from '../actionTypes';
 
 
-export default function authedPlayer(state = (window.user || ''), action) {
+export default function authedPlayerId(state = (window.user._id || ''), action) {
 
     switch (action.type) {
         default:

@@ -21,7 +21,6 @@ export const compareScoreFunctionInverse = (a, b) => {
  * Returns an array of ids of the players which the authed player is allowed to challenge
  */
 export const getChallengeables = (players, me) => {
-
     let filteredPlayers = players.filter(pl => {
         return (
             pl._id !== me._id &&

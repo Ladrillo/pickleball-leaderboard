@@ -1,18 +1,21 @@
 let Player = require('../players/player.model');
 
 
+// unprotected
 exports.dummyPlayer = (req, res, next) => {
 
     const player = new Player;
 
     player.displayName  = randomName();
     player.google.id    = randomNum(1000000);
-    player.stats        = {};
+    player.stats        = {
+        locked: ''
+    };
     player.stats.score  = randomNum(12);
     player.stats.locked = '';
 
     player.save();
-    res.json(player);
+    res.status(200).json(player);
 };
 
 

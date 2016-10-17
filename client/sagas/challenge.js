@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { takeEvery } from 'redux-saga';
+import { takeEvery, takeLatest } from 'redux-saga';
 import { call, put, select } from 'redux-saga/effects';
 import * as types from '../actionTypes';
 
@@ -12,8 +12,18 @@ export function* challenge(action) {
                 id1: action.payload.id1,
                 id2: action.payload.id2
             });
-
-        if (result.status == 200) {
+        if (result.status == 200 && result.data.warning === 'authenticate') {
+            location.reload();
+        }
+        else if (result.status == 200 && result.data.warning === 'refresh') {
+            yield put({
+                type: types.INCONSISTENT_STATE
+            });
+            yield put({
+                type: types.GET_PLAYERS
+            });
+        }
+        else if (result.status == 200) {
             yield put({
                 type: types.CHALLENGE_SUCCEEDED
             });
@@ -22,6 +32,9 @@ export function* challenge(action) {
             });
         }
         else if (result.status != 200) {
+            yield put({
+                type: types.GET_PLAYERS
+            });
             const error = {
                 result
             };
@@ -43,10 +56,21 @@ export function* unchallenge(action) {
             '/api/unlock',
             {
                 id1: action.payload.id1,
-                id2: action.payload.id2
+                id2: action.payload.id2,
+                result: action.payload.result
             });
-
-        if (result.status == 200) {
+        if (result.status == 200 && result.data.warning === 'authenticate') {
+            location.reload();
+        }
+        else if (result.status == 200 && result.data.warning === 'refresh') {
+            yield put({
+                type: types.INCONSISTENT_STATE
+            });
+            yield put({
+                type: types.GET_PLAYERS
+            });
+        }
+        else if (result.status == 200) {
             yield put({
                 type: types.UNCHALLENGE_SUCCEEDED
             });
@@ -79,10 +103,10 @@ const post = (url, data) => {
 
 
 export function* watchChallenge() {
-    yield* takeEvery(types.CHALLENGE, challenge);
+    yield* takeLatest(types.CHALLENGE, challenge);
 }
 
 
 export function* watchUnchallenge() {
-    yield* takeEvery(types.UNCHALLENGE, unchallenge);
+    yield* takeLatest(types.UNCHALLENGE, unchallenge);
 }

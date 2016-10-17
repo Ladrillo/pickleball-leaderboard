@@ -42,7 +42,6 @@ module.exports = () => {
             inline: true,
             publicPath: '/bundle/',
             stats: { colors: true },
-            noInfo: true
         }));
         morgan = require('morgan');
         app.use(morgan('dev'));

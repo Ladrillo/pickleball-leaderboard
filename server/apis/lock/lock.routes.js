@@ -8,6 +8,7 @@ module.exports = app => {
     app.route('/api/unlock')
         .post(Ctrl.unlockPlayer);
 
+    // unprotected
     app.route('/api/unlock_all')
         .get(Ctrl.unlockAll);
 };

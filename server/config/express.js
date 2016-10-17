@@ -1,5 +1,5 @@
 const config         = require('./config');
-const environment    = 'development';
+const environment    = process.env.NODE_ENV || 'development';
 
 // middleware
 const express        = require('express');

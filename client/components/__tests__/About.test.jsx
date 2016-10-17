@@ -9,7 +9,7 @@ describe(`About component`, () => {
 		const component = renderer.create(
 			<About />
 		);
-		let tree = component.toJSON();
+		const tree = component.toJSON();
 		expect(tree).toMatchSnapshot();
 	});
 });

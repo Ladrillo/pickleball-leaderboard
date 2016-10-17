@@ -10,16 +10,16 @@ import { calculateColor } from '../helpers/player';
 import ChallengeWidget from './ChallengeWidget';
 
 
-let Player = props => {
+const Player = props => {
 
-    let { player, me, authedPlayerId, myOpponent, isMe, isMyOpponent, isChallengeable } = props;
-    let { challenge, unchallenge } = props;
+    const { player, me, authedPlayerId, myOpponent, isMe, isMyOpponent, isChallengeable } = props;
+    const { challenge, unchallenge } = props;
 
-    let selectColor = () => {
+    const selectColor = () => {
         if (isMe || isMyOpponent) return '#FCD95D';
     };
 
-    let style = {
+    const style = {
         margin: 10,
         padding: 10,
         borderStyle: 'solid',
@@ -45,13 +45,13 @@ let Player = props => {
 };
 
 
-let mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state, ownProps) => ({
     state,
     authedPlayerId: state.authedPlayerId,
     me: state.players.find(pl => pl._id === state.authedPlayerId),
     myOpponent: state.players.find(pl => pl.stats.locked.id === state.authedPlayerId)
 });
-let mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 
 export default connect(

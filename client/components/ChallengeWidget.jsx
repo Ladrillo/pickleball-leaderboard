@@ -3,10 +3,10 @@ import React from 'react';
 import { getChallengeables } from '../helpers/sorting';
 
 
-let ChallengeWidget = props => {
+const ChallengeWidget = props => {
 
-    let { challengeHandler, unchallengeHandler } =  props;
-    let { player, me, authedPlayerId, isChallengeable, myOpponentId, isMe } = props;
+    const { challengeHandler, unchallengeHandler } =  props;
+    const { player, me, authedPlayerId, isChallengeable, myOpponentId, isMe } = props;
 console.log('widget rendering!')
     return (
         <div>

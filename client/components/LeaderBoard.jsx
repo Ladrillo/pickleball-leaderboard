@@ -15,11 +15,11 @@ class LeaderBoard extends React.Component {
 
     render() {
 
-        let { players, authedPlayerId, me } = this.props;
+        const { players, authedPlayerId, me } = this.props;
 
-        let challengeables = getChallengeables(players, me);
+        const challengeables = getChallengeables(players, me);
 
-        let playersList = players.map(player => (
+        const playersList = players.map(player => (
             <Player
                 key             = { player._id }
                 player          = { player }
@@ -38,14 +38,14 @@ class LeaderBoard extends React.Component {
 }
 
 
-let mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state, ownProps) => ({
     players: state.players,
     authedPlayerId: state.authedPlayerId,
     me: state.players.find(pl => pl._id === state.authedPlayerId),
 });
 
 
-let mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 
 export default connect(

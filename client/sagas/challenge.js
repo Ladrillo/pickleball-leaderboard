@@ -108,7 +108,7 @@ export function* unchallenge(action) {
 
 
 const post = (url, data) => {
-    let instance = axios.create({
+    const instance = axios.create({
         headers: { "Content-Type": "application/json" }
     });
     return instance.post(url, data);

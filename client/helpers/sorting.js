@@ -21,7 +21,7 @@ export const compareScoreFunctionInverse = (a, b) => {
  * Returns an array of ids of the players which the authed player is allowed to challenge
  */
 export const getChallengeables = (players, me) => {
-    let filteredPlayers = players.filter(pl => {
+    const filteredPlayers = players.filter(pl => {
         return (
             pl._id !== me._id &&
             !pl.stats.locked.id &&
@@ -31,9 +31,9 @@ export const getChallengeables = (players, me) => {
 
     if (!filteredPlayers.length) return [];
 
-    let sortedPlayers = filteredPlayers.sort(compareScoreFunctionInverse);
+    const sortedPlayers = filteredPlayers.sort(compareScoreFunctionInverse);
 
-    let challengeableScore = sortedPlayers[0].stats.score;
+    const challengeableScore = sortedPlayers[0].stats.score;
 
     return sortedPlayers
         .filter(pl => pl.stats.score === challengeableScore)

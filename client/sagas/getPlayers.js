@@ -35,7 +35,7 @@ export function* getPlayers() {
 
 
 const get = url => {
-    let instance = axios.create({
+    const instance = axios.create({
         headers: { "Content-Type": "application/json" }
     });
     return instance.get(url);

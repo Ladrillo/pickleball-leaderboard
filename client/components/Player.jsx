@@ -24,6 +24,7 @@ const Player = props => {
         margin: 10,
         padding: 10,
         borderStyle: 'solid',
+        borderRadius: 10,
         backgroundColor: selectColor()
     };
 

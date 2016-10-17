@@ -12,7 +12,7 @@ const ChallengeWidget = props => {
         textShadow: '1px 1px 2px black, 0 0 1em blue, 0 0 0.2em',
         fontFamily: 'Creepster',
         textAlign: 'center',
-        color: '#7141B7',
+        color: '#5213D4',
         fontSize: 32
     };
 

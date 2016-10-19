@@ -1,0 +1,18 @@
+exports[`Warcry Renders warcry if the player is challengeable 1`] = `
+<div
+  onClick={[Function]}
+  style={
+    Object {
+      "color": "#5213D4",
+      "fontFamily": "Luckiest Guy",
+      "fontSize": 24,
+      "textAlign": "center",
+    }
+  }>
+  challenge 
+  Darien
+  !
+</div>
+`;
+
+exports[`Warcry returns null if the player is not challengeable 1`] = `null`;

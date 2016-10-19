@@ -10,7 +10,7 @@ const challengeStyle = {
 
 
 
-const Victim = props => {
+const Warcry = props => {
 
     const potentialVictim = (
         !props.me.stats.locked.id &&
@@ -31,4 +31,4 @@ const Victim = props => {
 };
 
 
-export default Victim;
+export default Warcry;

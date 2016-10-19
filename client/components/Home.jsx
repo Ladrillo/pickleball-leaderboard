@@ -30,9 +30,7 @@ class Home extends React.Component {
 }
 
 
-const mapStateToProps = (state, ownProps) => ({
-    state
-});
+const mapStateToProps = (state, ownProps) => ({});
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 

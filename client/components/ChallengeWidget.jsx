@@ -7,7 +7,7 @@ import LogResult from './LogResult';
 import { getChallengeables } from '../helpers/sorting';
 
 
-const ChallengeWidget = props => {console.log(JSON.stringify(props.me)); return (
+const ChallengeWidget = props => (
     <div>
         <Status
             player = { props.player } />
@@ -25,7 +25,7 @@ const ChallengeWidget = props => {console.log(JSON.stringify(props.me)); return 
             authedPlayerId     = { props.authedPlayerId }
             myOpponentId       = { props.myOpponentId } />
     </div>
-);};
+);
 
 
 export default ChallengeWidget;

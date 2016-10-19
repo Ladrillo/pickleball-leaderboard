@@ -8,59 +8,32 @@ import * as actions from '../actions/actions';
 import { calculateColor } from '../helpers/player';
 
 import ChallengeWidget from './ChallengeWidget';
+import NameAndScore from './NameAndScore';
 
 
 const Player = props => {
-
-    const { player, me, authedPlayerId, myOpponent, isMe, isMyOpponent, isChallengeable } = props;
-    const { challenge, unchallenge } = props;
-
-    const selectColor = () => {
-        if (isMe || isMyOpponent) return '#FDC403';
-        else return '#FFF9E6';
-    };
 
     const divStyle = {
         margin: 10,
         padding: 10,
         borderStyle: 'solid',
         borderRadius: 10,
-        backgroundColor: selectColor()
-    };
-
-    const nameStyle = {
-        fontFamily: 'Indie Flower',
-        textAlign: 'center',
-        fontSize: 32,
-        marginBottom: 12
-    };
-
-    const scoreStyle = {
-        fontFamily: 'Luckiest Guy',
-        fontSize: 28
-    };
-
-    const parentStyle = {
-        display: 'flex',
-        justifyContent: 'flex-end'
+        backgroundColor: (props.isMe || props.isMyOpponent ? '#FDC403' : '#FFF9E6')
     };
 
     return (
         <div style = { divStyle }>
-            <div style = { parentStyle }>
-                <div style = { scoreStyle }>{ player.stats.score }</div>
-            </div>
-            <div style = { nameStyle }>{ player.displayName }</div>
-            <div>{ player.score }</div>
+            <NameAndScore
+                player = { props.player }/>
             <ChallengeWidget
-                challengeHandler   = { challenge }
-                unchallengeHandler = { unchallenge }
-                player             = { player }
-                me                 = { me }
-                myOpponentId       = { myOpponent && myOpponent._id }
-                authedPlayerId     = { authedPlayerId }
-                isChallengeable    = { isChallengeable }
-                isMe               = { isMe } />
+                challengeHandler   = { props.challenge }
+                unchallengeHandler = { props.unchallenge }
+                player             = { props.player }
+                me                 = { props.me }
+                myOpponentId       = { props.myOpponent && props.myOpponent._id }
+                authedPlayerId     = { props.authedPlayerId }
+                isChallengeable    = { props.isChallengeable }
+                isMe               = { props.isMe } />
         </div>
     );
 };

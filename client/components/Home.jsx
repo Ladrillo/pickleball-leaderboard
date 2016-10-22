@@ -24,6 +24,7 @@ class Home extends React.Component {
             <div style = {{ margin: 20, backgroundColor: '#7141B7' }}>
                 <p style = { style }>Welcome to the Awesome Pickleball Leaderboard!</p>
                 <LeaderBoard />
+                <a href="/about">about this marvelous app</a>
             </div>
         );
     }

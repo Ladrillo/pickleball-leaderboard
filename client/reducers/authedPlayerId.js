@@ -5,6 +5,9 @@ export default function authedPlayerId(state = '', action) {
 
     switch (action.type) {
         default:
-            return window.user._id || '';
+            if (window.user) {
+                return window.user._id;
+            }
+            return '';
     }
 }

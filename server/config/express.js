@@ -18,7 +18,13 @@ module.exports = () => {
 
     // here we set our templating engine
     // route is relative to server.js
-    app.set('views', ['./client']);
+    app.set(
+        'views',
+        [
+            './server/pages/about',
+            './server/pages/login',
+            './server/pages/index'
+        ]);
     app.set('view engine', 'ejs');
 
     // this middleware will run no matter the environment
@@ -58,6 +64,9 @@ module.exports = () => {
     require('../apis/players/player.routes')(app);
     require('../apis/lock/lock.routes')(app);
     require('../apis/dummies/dummy.routes')(app);
+    require('../pages/about/about')(app);
+    require('../pages/login/login')(app);
+    require('../pages/index/index')(app);
 
     // static assets
     app.use(express.static('./client'));

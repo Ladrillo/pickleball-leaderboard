@@ -16,7 +16,7 @@ module.exports = {
         new ExtractTextPlugin('styles.css')
     ],
 
-    devtool: 'cheap-source-map',
+    devtool: 'source-map',
 
     module: {
 

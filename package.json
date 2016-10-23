@@ -10,7 +10,7 @@
   "scripts": {
     "test": "jest --watch",
     "start": "node server.js",
-    "postinstall": "webpack --config webpack.config.js --devtool cheap-module-source-map --progress --colors"
+    "postinstall": "webpack --config webpack.config.js --devtool source-map --progress --colors"
   },
   "babel": {
     "presets": [
